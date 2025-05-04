@@ -1,0 +1,185 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class HomeGame extends StatelessWidget {
+  const HomeGame({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 500,
+      height: 470,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        gradient: LinearGradient(
+          colors: [
+            Color(0xFF175553),
+            Color(0xFF43D9AD).withValues(alpha: 0.013),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomCenter,
+        ),
+      ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned(top: 5, left: 5, child: _Dot()),
+          Positioned(top: 5, right: 5, child: _Dot()),
+          Positioned(bottom: 5, right: 5, child: _Dot()),
+          Positioned(bottom: 5, left: 5, child: _Dot()),
+          Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                _GameContainer(),
+                _GameControlsContainer(),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _GameContainer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    //TODO: Implement Game.
+    return Container(
+      width: 239,
+      height: double.infinity,
+      margin: EdgeInsets.only(left: 30, top: 30, bottom: 30),
+      decoration: BoxDecoration(
+        color: Color(0xFF1D293D),
+        borderRadius: BorderRadius.circular(20),
+      ),
+    );
+  }
+}
+
+class _GameControlsContainer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Container(
+            height: 140,
+            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+            margin: EdgeInsets.all(30),
+            decoration: BoxDecoration(
+              color: Color(0xFF1D293D),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              spacing: 5,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '//use keyboard',
+                  style: GoogleFonts.firaCode(color: Colors.white),
+                ),
+                Text(
+                  '//arrows to play',
+                  style: GoogleFonts.firaCode(color: Colors.white),
+                ),
+                Spacer(),
+                Align(
+                  alignment: Alignment.center,
+                  child: _ButtonKeyboard(icon: Icons.arrow_drop_up_outlined),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _ButtonKeyboard(icon: Icons.arrow_left_outlined),
+                    _ButtonKeyboard(icon: Icons.arrow_drop_down),
+                    _ButtonKeyboard(icon: Icons.arrow_right),
+                  ],
+                ),
+                SizedBox(height: 5)
+              ],
+            ),
+          ),
+          Spacer(),
+          _SkipButton()
+        ],
+      ),
+    );
+  }
+}
+
+class _SkipButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () {},
+        child: Container(
+          margin: EdgeInsets.all(30),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.white,
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          height: 40,
+          width: 58,
+          child: Center(
+            child: Text(
+              'Skip',
+              style: GoogleFonts.firaCode(color: Colors.white),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ButtonKeyboard extends StatelessWidget {
+  final IconData icon;
+
+  const _ButtonKeyboard({
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 48,
+      height: 30,
+      decoration: BoxDecoration(
+        color: Color(0xFF0A0A0A),
+        border: Border.all(
+          color: Color(0xFF314158),
+        ),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Center(
+        child: Icon(
+          icon,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+}
+
+class _Dot extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SvgPicture.asset(
+      'assets/svg/bolt-down-left.svg',
+      width: 30,
+      height: 30,
+    );
+  }
+}
