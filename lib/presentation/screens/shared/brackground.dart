@@ -28,22 +28,23 @@ class _BrackgroundState extends State<Brackground>
         body: Stack(
           children: [
             Center(child: Text('Hola Mundo')),
-
-            AnimatedPointer(pointerOffset: pointerOffset, radius: 45),
+            AnimatedPointer(
+              pointerOffset: pointerOffset,
+              radius: 45,
+            ),
             AnimatedPointer(
               pointerOffset: pointerOffset,
               movementDuration: const Duration(milliseconds: 200),
               radius: 5,
             ),
             BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+              filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
               child: Container(
                 height: double.infinity,
                 width: double.infinity,
                 color: Colors.transparent,
               ),
             ),
-
             SizedBox(
               height: double.infinity,
               width: double.infinity,
