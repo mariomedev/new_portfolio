@@ -1,0 +1,72 @@
+import 'package:flutter/material.dart';
+
+import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class BoxItemNavigator extends StatelessWidget {
+  final String? title;
+  final bool? isSelected;
+  final Function()? onTap;
+  final double? width;
+  final String? imagePath;
+
+  const BoxItemNavigator({
+    super.key,
+    this.title,
+    this.isSelected = false,
+    this.onTap,
+    this.width,
+    this.imagePath,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: Container(
+          height: double.infinity,
+          width: width ?? 150,
+          decoration: BoxDecoration(
+            border: Border.symmetric(
+              vertical: BorderSide(color: Color(0xFF314158)),
+            ),
+          ),
+          child: Column(
+            children: [
+              Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (title != null)
+                    Text(
+                      title ?? '',
+                      style: GoogleFonts.firaCode(
+                        fontSize: 16,
+                        color: Color(0xFF90A1B9),
+                      ),
+                    ),
+                  if (imagePath != null && title != null) 
+                    SizedBox(width: 10),
+                  if (imagePath != null) 
+                    SvgPicture.asset(
+                      imagePath!,
+                      height: 24,
+                      width: 24,
+                    ),
+                  
+                ],
+              ),
+              Spacer(),
+              Container(
+                height: 3,
+                color: isSelected! ? Colors.orange : Colors.transparent,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
