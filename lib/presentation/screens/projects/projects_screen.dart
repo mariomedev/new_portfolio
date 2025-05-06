@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../shared/shared.dart';
+import 'widgets/widgets.dart';
 
 class ProjectsScreen extends StatelessWidget {
   const ProjectsScreen({super.key});
@@ -10,9 +11,21 @@ class ProjectsScreen extends StatelessWidget {
     return Scaffold(
       body: Brackground(
         child: Column(
-          children: [HeaderNavigator(index: 2), Spacer(), Footer()],
+          children: [
+            HeaderNavigator(index: 2),
+            Expanded(
+              child: Row(
+                children: [
+                  ProjectsFolderMenu(),
+                  ProjectsGridView(),
+                ],
+              ),
+            ),
+            Footer(),
+          ],
         ),
       ),
     );
   }
 }
+
