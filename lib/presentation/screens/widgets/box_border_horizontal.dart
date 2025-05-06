@@ -12,7 +12,7 @@ class BoxBorderHorizontal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height ?? 50,
+      height: height,
       decoration: BoxDecoration(
         border: Border.symmetric(
           horizontal: BorderSide(
@@ -24,4 +24,3 @@ class BoxBorderHorizontal extends StatelessWidget {
     );
   }
 }
-
