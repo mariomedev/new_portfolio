@@ -20,5 +20,43 @@ class TextContants {
  */
 
  """;
- 
+  static const String codeContact = r'''
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  final Map<String, String> message = {
+    "name": "",
+    "email": "",
+    "message": "",
+    "date": "Thu 21 Apr",
+  };
+
+  void send(Map<String, String> msg) {
+    ref.read(contactProvider.notifier).sendMessage(msg);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text("Contact Me")),
+        body: Center(
+          child: ElevatedButton(
+            key: Key('sendBtn'),
+            onPressed: () => send(message),
+            child: Text("Enviar"),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+
+''';
 }
