@@ -13,7 +13,7 @@ class ProjectsCard extends StatelessWidget {
       child: Column(
         children: [
           _Title(),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Expanded(
@@ -40,12 +40,12 @@ class _BodyCard extends StatelessWidget {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             bottomLeft: Radius.circular(16),
             bottomRight: Radius.circular(16),
           ),
           border: Border.all(
-            color: Color(0xff1D293D),
+            color: const Color(0xff1D293D),
             width: 1,
           ),
         ),
@@ -59,7 +59,7 @@ class _BodyCard extends StatelessWidget {
               Text(
                 'Duis aute irure dolor in velit esse cillum dolore.',
                 style: GoogleFonts.firaCode(
-                  color: Color(0xFF90A1B9),
+                  color: const Color(0xFF90A1B9),
                   fontSize: 16,
                 ),
               ),
@@ -68,7 +68,7 @@ class _BodyCard extends StatelessWidget {
                 height: 40,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xff45556C),
+                    backgroundColor: const Color(0xff45556C),
                     shape: RoundedRectangleBorder(
                       // Change your radius here
                       borderRadius: BorderRadius.circular(8),
@@ -98,16 +98,16 @@ class _ImageCard extends StatelessWidget {
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(16),
             topRight: Radius.circular(16),
           ),
           border: Border.all(
-            color: Color(0xff1D293D),
+            color: const Color(0xff1D293D),
             width: 1,
           ),
         ),
-        child: FadeInImage(
+        child: const FadeInImage(
           height: double.infinity,
           width: double.infinity,
           placeholder: AssetImage('assets/img/loading.gif'),
@@ -130,14 +130,14 @@ class _Title extends StatelessWidget {
         Text(
           'Project ',
           style: GoogleFonts.firaCode(
-            color: Color(0xFF615FFF),
+            color: const Color(0xFF615FFF),
             fontSize: 16,
           ),
         ),
         Text(
           '// _ui-animations',
           style: GoogleFonts.firaCode(
-            color: Color(0xFF90A1B9),
+            color: const Color(0xFF90A1B9),
             fontSize: 16,
           ),
         ),

@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../presentation/screens/screens.dart';
 
 final GoRouter router = GoRouter(
-  initialLocation: '/home',
+  initialLocation: '/splash',
   routes: [
     GoRoute(
       path: '/splash',

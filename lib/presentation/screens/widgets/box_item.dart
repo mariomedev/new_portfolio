@@ -12,7 +12,7 @@ class BoxItem extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: width ?? 300,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border.symmetric(
           vertical: BorderSide(color: Color(0xFF314158)),
         ),
@@ -20,7 +20,7 @@ class BoxItem extends StatelessWidget {
       child: Center(
         child: Text(
           title,
-          style: GoogleFonts.firaCode(fontSize: 16, color: Color(0xFF90A1B9)),
+          style: GoogleFonts.firaCode(fontSize: 16, color: const Color(0xFF90A1B9)),
         ),
       ),
     );

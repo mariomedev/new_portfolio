@@ -13,7 +13,7 @@ class BoxBorderHorizontal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: height,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border.symmetric(
           horizontal: BorderSide(
             color: Color(0xFF314158),

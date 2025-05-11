@@ -26,10 +26,10 @@ class FileOpen extends StatelessWidget {
                   Text(
                     title,
                     style: GoogleFonts.firaCode(
-                        color: Color(0xFF90A1B9), fontSize: 16),
+                        color: const Color(0xFF90A1B9), fontSize: 16),
                   ),
-                  Spacer(),
-                  Icon(
+                  const Spacer(),
+                  const Icon(
                     Icons.close_sharp,
                     color: Color(0xFF90A1B9),
                     size: 15,

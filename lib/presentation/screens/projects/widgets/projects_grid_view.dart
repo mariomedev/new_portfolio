@@ -14,15 +14,15 @@ class ProjectsGridView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FileOpen(title: 'Flutter'),
+          const FileOpen(title: 'Flutter'),
           Expanded(
             child: GridView.builder(
               itemCount: 10,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
               ),
               itemBuilder: (context, index) {
-                return ProjectsCard();
+                return const ProjectsCard();
               },
             ),
           )

@@ -28,14 +28,14 @@ class BoxItemNavigator extends StatelessWidget {
         child: Container(
           height: double.infinity,
           width: width ?? 150,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             border: Border.symmetric(
               vertical: BorderSide(color: Color(0xFF314158)),
             ),
           ),
           child: Column(
             children: [
-              Spacer(),
+              const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -44,11 +44,11 @@ class BoxItemNavigator extends StatelessWidget {
                       title ?? '',
                       style: GoogleFonts.firaCode(
                         fontSize: 16,
-                        color: Color(0xFF90A1B9),
+                        color: const Color(0xFF90A1B9),
                       ),
                     ),
                   if (imagePath != null && title != null) 
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                   if (imagePath != null) 
                     SvgPicture.asset(
                       imagePath!,
@@ -58,7 +58,7 @@ class BoxItemNavigator extends StatelessWidget {
                   
                 ],
               ),
-              Spacer(),
+              const Spacer(),
               Container(
                 height: 3,
                 color: isSelected! ? Colors.orange : Colors.transparent,

@@ -16,7 +16,7 @@ class BoxBorderVertical extends StatelessWidget {
     return Container(
       width: width ?? 50,
       height: height,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border.symmetric(
           vertical: BorderSide(
             color: Color(0xFF314158),
