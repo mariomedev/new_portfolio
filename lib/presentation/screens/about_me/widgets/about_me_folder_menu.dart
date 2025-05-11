@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/core.dart';
 import '../../widgets/widgets.dart';
 
 class AboutMeFolderMenu extends StatelessWidget {
@@ -11,66 +12,75 @@ class AboutMeFolderMenu extends StatelessWidget {
       width: 330,
       child: Column(
         children: [
-          BoxBorderHorizontal(
+          const BoxBorderHorizontal(
             height: 50,
             child: ButtonInfo(
               title: 'Personal-Info',
+              isSelected: true,
               arrowIsActive: true,
-              isOpen: true,
+              isDawer: true,
             ),
           ),
           BoxBorderHorizontal(
             child: Column(
               spacing: 10,
               children: [
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 ButtonInfo(
                   title: 'Bio',
                   arrowIsActive: true,
-                  isOpen: true,
+                  isDawer: true,
                   pathImage: 'assets/svg/icon-folder-red.svg',
-                  onTap: (value) {
-                  },
+                  onTap: (value) {},
                 ),
                 ButtonInfo(
                   title: 'interests',
                   arrowIsActive: true,
                   pathImage: 'assets/svg/icon-folder-green.svg',
-                  onTap: (value) {
-                  },
+                  onTap: (value) {},
                 ),
                 ButtonInfo(
                   title: 'education',
                   arrowIsActive: true,
                   pathImage: 'assets/svg/icon-folder-blue.svg',
+                  onTap: (value) {},
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
               ],
             ),
           ),
-          BoxBorderHorizontal(
+          const BoxBorderHorizontal(
             height: 50,
             child: ButtonInfo(
               title: 'Contacts',
+              isDawer: true,
               arrowIsActive: true,
-              isOpen: true,
+              isSelected: true,
             ),
           ),
           Column(
             spacing: 10,
             children: [
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               ButtonInfo(
-                title: 'mario.melo.dev@gmail.com',
+                title: TextContants.email,
                 pathImage: 'assets/svg/email.svg',
+                onTap: (value) {},
               ),
               ButtonInfo(
-                title: '+57 300-508-8310',
+                title: TextContants.phone,
                 pathImage: 'assets/svg/phone.svg',
+                isDawer: false,
+                onTap: (value) {
+                  UrlLaunch.launchInBrowser(TextContants.phoneLink);
+                },
               ),
               ButtonInfo(
-                title: 'mario.melo.dev',
+                title: TextContants.linkdinName,
                 pathImage: 'assets/svg/linkedin.svg',
+                onTap: (value) {
+                  UrlLaunch.launchInBrowser(TextContants.linkdinLink);
+                },
               ),
             ],
           )

@@ -14,7 +14,7 @@ class AboutMeLateralMenu extends StatelessWidget {
       child: Column(
         spacing: 32,
         children: [
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           SvgPicture.asset(
             'assets/svg/terminal.svg',
             width: 24,

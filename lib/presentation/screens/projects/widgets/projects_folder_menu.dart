@@ -16,15 +16,15 @@ class ProjectsFolderMenu extends StatelessWidget {
       width: 360,
       child: Column(
         children: [
-          BoxBorderHorizontal(
+          const BoxBorderHorizontal(
             height: 50,
             child: ButtonInfo(
               title: 'Projects',
               arrowIsActive: true,
-              isOpen: true,
+              isDawer: true,
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
@@ -83,10 +83,10 @@ class _CheckBoxTechnologyState extends State<CheckBoxTechnology> {
       WidgetState.focused,
     };
     if (states.any(interactiveStates.contains)) {
-      return Color(0xFF615FFF);
+      return const Color(0xFF615FFF);
     }
     if (states.contains(WidgetState.selected)) {
-      return Color(0xFF62748E);
+      return const Color(0xFF62748E);
     }
     return Colors.transparent;
   }
@@ -108,17 +108,17 @@ class _CheckBoxTechnologyState extends State<CheckBoxTechnology> {
             setState(() {});
           },
         ),
-        SizedBox(width: 20),
+        const SizedBox(width: 20),
         SvgPicture.asset(
           widget.pathImage,
           height: 24,
           width: 24,
         ),
-        SizedBox(width: 5),
+        const SizedBox(width: 5),
         Text(
           widget.tilte,
           style: GoogleFonts.firaCode(
-            color: Color(0xFF62748E),
+            color: const Color(0xFF62748E),
             fontSize: 16,
           ),
         )

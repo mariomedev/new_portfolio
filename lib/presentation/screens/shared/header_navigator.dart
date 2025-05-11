@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
+import '../../../core/core.dart';
 import '../widgets/widgets.dart';
 
 class HeaderNavigator extends StatefulWidget {
@@ -25,7 +26,10 @@ class _HeaderNavigatorState extends State<HeaderNavigator> {
       ),
       child: Row(
         children: [
-          const BoxItem(title: 'Mario_Melo', width: 360),
+          const BoxItem(
+            title: TextContants.nameDeveloper,
+            width: 360,
+          ),
           BoxItemNavigator(
             title: '_hello',
             isSelected: widget.index == 0 ? true : false,

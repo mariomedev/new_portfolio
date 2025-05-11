@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeGame extends StatelessWidget {
@@ -16,8 +17,8 @@ class HomeGame extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         gradient: LinearGradient(
           colors: [
-            Color(0xFF175553),
-            Color(0xFF43D9AD).withValues(alpha: 0.013),
+            const Color(0xFF175553),
+            const Color(0xFF43D9AD).withValues(alpha: 0.013),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomCenter,
@@ -30,15 +31,13 @@ class HomeGame extends StatelessWidget {
           Positioned(top: 5, right: 5, child: _Dot()),
           Positioned(bottom: 5, right: 5, child: _Dot()),
           Positioned(bottom: 5, left: 5, child: _Dot()),
-          Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                _GameContainer(),
-                _GameControlsContainer(),
-              ],
-            ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              _GameContainer(),
+              _GameControlsContainer(),
+            ],
           ),
         ],
       ),
@@ -53,9 +52,9 @@ class _GameContainer extends StatelessWidget {
     return Container(
       width: 239,
       height: double.infinity,
-      margin: EdgeInsets.only(left: 30, top: 30, bottom: 30),
+      margin: const EdgeInsets.only(left: 30, top: 30, bottom: 30),
       decoration: BoxDecoration(
-        color: Color(0xFF1D293D),
+        color: const Color(0xFF1D293D),
         borderRadius: BorderRadius.circular(20),
       ),
     );
@@ -72,10 +71,10 @@ class _GameControlsContainer extends StatelessWidget {
         children: [
           Container(
             height: 140,
-            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-            margin: EdgeInsets.all(30),
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+            margin: const EdgeInsets.all(30),
             decoration: BoxDecoration(
-              color: Color(0xFF1D293D),
+              color: const Color(0xFF1D293D),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Column(
@@ -90,12 +89,12 @@ class _GameControlsContainer extends StatelessWidget {
                   '//arrows to play',
                   style: GoogleFonts.firaCode(color: Colors.white),
                 ),
-                Spacer(),
-                Align(
+                const Spacer(),
+                const Align(
                   alignment: Alignment.center,
                   child: _ButtonKeyboard(icon: Icons.arrow_drop_up_outlined),
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     _ButtonKeyboard(icon: Icons.arrow_left_outlined),
@@ -103,11 +102,11 @@ class _GameControlsContainer extends StatelessWidget {
                     _ButtonKeyboard(icon: Icons.arrow_right),
                   ],
                 ),
-                SizedBox(height: 5)
+                const SizedBox(height: 5)
               ],
             ),
           ),
-          Spacer(),
+          const Spacer(),
           _SkipButton()
         ],
       ),
@@ -121,9 +120,11 @@ class _SkipButton extends StatelessWidget {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          context.push('/about-me');
+        },
         child: Container(
-          margin: EdgeInsets.all(30),
+          margin: const EdgeInsets.all(30),
           decoration: BoxDecoration(
             border: Border.all(
               color: Colors.white,
@@ -157,9 +158,9 @@ class _ButtonKeyboard extends StatelessWidget {
       width: 48,
       height: 30,
       decoration: BoxDecoration(
-        color: Color(0xFF0A0A0A),
+        color: const Color(0xFF0A0A0A),
         border: Border.all(
-          color: Color(0xFF314158),
+          color: const Color(0xFF314158),
         ),
         borderRadius: BorderRadius.circular(8),
       ),
@@ -176,10 +177,26 @@ class _ButtonKeyboard extends StatelessWidget {
 class _Dot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(
-      'assets/svg/bolt-down-left.svg',
-      width: 30,
-      height: 30,
+    return Container(
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: RadialGradient(
+          stops: [0.15, 100],
+          colors: [
+            Color(0xFF196C6A),
+            Color(0xFF114B4A),
+          ],
+        ),
+      ),
+      width: 18,
+      height: 18,
+      child: Center(
+        child: SvgPicture.asset(
+          'assets/svg/bolt-down-left.svg',
+          width: 12,
+          height: 12,
+        ),
+      ),
     );
   }
 }

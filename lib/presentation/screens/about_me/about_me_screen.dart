@@ -9,7 +9,7 @@ class AboutMeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Brackground(
         child: Column(
           children: [
@@ -32,4 +32,3 @@ class AboutMeScreen extends StatelessWidget {
     );
   }
 }
-

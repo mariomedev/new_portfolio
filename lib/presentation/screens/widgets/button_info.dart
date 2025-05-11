@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,17 +5,19 @@ import 'package:google_fonts/google_fonts.dart';
 class ButtonInfo extends StatefulWidget {
   final String title;
   final bool? arrowIsActive;
-  final bool? isOpen;
+  final bool? isDawer;
+  final bool? isSelected;
   final String? pathImage;
   final ValueChanged<bool>? onTap;
 
   const ButtonInfo({
     super.key,
     required this.title,
-    this.isOpen = false,
+    this.isDawer = false,
     this.arrowIsActive = false,
     this.pathImage,
     this.onTap,
+    this.isSelected,
   });
 
   @override
@@ -28,7 +29,9 @@ class _ButtonInfoState extends State<ButtonInfo> {
 
   @override
   void initState() {
-    _isSeleted = widget.isOpen ?? false;
+    if (widget.isSelected != null) {
+      _isSeleted = widget.isSelected!;
+    }
     super.initState();
   }
 
@@ -37,7 +40,7 @@ class _ButtonInfoState extends State<ButtonInfo> {
     return GestureDetector(
       onTap: () {
         if (widget.onTap != null) {
-          widget.onTap!(!widget.isOpen!);
+          widget.onTap!(!_isSeleted);
           _isSeleted = !_isSeleted;
         }
         setState(() {});
@@ -46,7 +49,7 @@ class _ButtonInfoState extends State<ButtonInfo> {
         spacing: 10,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           if (widget.arrowIsActive!)
             Icon(
               _isSeleted ? Icons.arrow_drop_down_rounded : Icons.arrow_right,
@@ -63,7 +66,11 @@ class _ButtonInfoState extends State<ButtonInfo> {
             child: Text(
               widget.title,
               style: GoogleFonts.firaCode(
-                color: _isSeleted ? Colors.white : Color(0xFF90A1B9),
+                color: widget.isDawer!
+                    ? (_isSeleted)
+                        ? Colors.white
+                        : const Color(0xFF90A1B9)
+                    : const Color(0xFF90A1B9),
                 fontSize: 16,
               ),
             ),

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../core/core.dart';
+
 class HomeInfo extends StatelessWidget {
   const HomeInfo({
     super.key,
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +19,12 @@ class HomeInfo extends StatelessWidget {
           'Hi all. I am',
           style: textStyle.copyWith(
             fontSize: 20,
-            color: Color(0xFF90A1B9),
+            color: const Color(0xFF90A1B9),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Text(
-          'Mario Melo',
+          TextContants.nameDeveloper,
           style: textStyle.copyWith(
             fontSize: 80,
             color: Colors.white,
@@ -31,26 +32,26 @@ class HomeInfo extends StatelessWidget {
           ),
         ),
         Text(
-          '> Flutter Developer',
+          '> ${TextContants.profession}',
           style: textStyle.copyWith(
             fontSize: 40,
-            color: Color(0xFF615FFF),
+            color: const Color(0xFF615FFF),
             fontWeight: FontWeight.w700,
           ),
         ),
-        SizedBox(height: 40),
+        const SizedBox(height: 40),
         Text(
           '// complete the game to continue',
           style: textStyle.copyWith(
             fontSize: 20,
-            color: Color(0xFF90A1B9),
+            color: const Color(0xFF90A1B9),
           ),
         ),
         Text(
           '// find my profile on Github:',
           style: textStyle.copyWith(
             fontSize: 20,
-            color: Color(0xFF90A1B9),
+            color: const Color(0xFF90A1B9),
           ),
         ),
         Row(
@@ -60,14 +61,14 @@ class HomeInfo extends StatelessWidget {
               'Const',
               style: textStyle.copyWith(
                 fontSize: 20,
-                color: Color(0xFF615FFF),
+                color: const Color(0xFF615FFF),
               ),
             ),
             Text(
               'githubLink',
               style: textStyle.copyWith(
                 fontSize: 20,
-                color: Color(0xFF00D5BE),
+                color: const Color(0xFF00D5BE),
               ),
             ),
             Text(
@@ -77,11 +78,13 @@ class HomeInfo extends StatelessWidget {
             MouseRegion(
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
-                onDoubleTap: () {},
+                onTap: () {
+                  UrlLaunch.launchInBrowser(TextContants.gitHublink);
+                },
                 child: Text(
-                  '\'https://github.com/mariomedev\'',
+                  TextContants.gitHublink,
                   style: textStyle.copyWith(
-                      fontSize: 20, color: Color(0xFFFFA1AD)),
+                      fontSize: 20, color: const Color(0xFFFFA1AD)),
                 ),
               ),
             ),

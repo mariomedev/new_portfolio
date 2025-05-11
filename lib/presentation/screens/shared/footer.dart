@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/core/core.dart';
+
 import 'package:myapp/presentation/screens/widgets/widgets.dart';
 
 class Footer extends StatelessWidget {
@@ -11,14 +13,14 @@ class Footer extends StatelessWidget {
     return Container(
       height: 40,
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border.symmetric(
           horizontal: BorderSide(
             color: Color(0xFF314158),
           ),
         ),
       ),
-      child: Row(
+      child: const Row(
         children: [
           BoxItem(
             title: 'Find-me-in:',
@@ -35,7 +37,7 @@ class Footer extends StatelessWidget {
           ),
           Spacer(),
           BoxItemNavigator(
-            title: '@mariomedev',
+            title: TextContants.linkGitHubName,
             imagePath: 'assets/svg/git.svg',
             width: 200,
           ),

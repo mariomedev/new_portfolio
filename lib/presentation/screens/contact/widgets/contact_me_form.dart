@@ -15,66 +15,64 @@ class ContactMeForm extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Expanded(
       child: BoxBorderVertical(
-        child: Form(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 200),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const _TitleText(title: '_name:'),
-                const SizedBox(height: 5),
-                FormCustom(
-                  onChanged: (value) {
-                    ref.read(codeContactProvider.notifier).sendMessage({
-                      'name': value,
-                    });
-                  },
-                ),
-                const SizedBox(height: 30),
-                const _TitleText(title: '_email:'),
-                const SizedBox(height: 5),
-                FormCustom(
-                  onChanged: (value) {
-                    ref.read(codeContactProvider.notifier).sendMessage({
-                      'email': value,
-                    });
-                  },
-                ),
-                const SizedBox(height: 30),
-                const _TitleText(title: '_message:'),
-                const SizedBox(height: 5),
-                FormCustom(
-                  isLager: true,
-                  onChanged: (value) {
-                    ref.read(codeContactProvider.notifier).sendMessage({
-                      'message': value,
-                    });
-                  },
-                ),
-                const SizedBox(height: 30),
-                SizedBox(
-                  width: 195,
-                  height: 50,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff314158),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 200),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const _TitleText(title: '_name:'),
+              const SizedBox(height: 5),
+              FormCustom(
+                onChanged: (value) {
+                  ref.read(codeContactProvider.notifier).sendMessage({
+                    'name': value,
+                  });
+                },
+              ),
+              const SizedBox(height: 30),
+              const _TitleText(title: '_email:'),
+              const SizedBox(height: 5),
+              FormCustom(
+                onChanged: (value) {
+                  ref.read(codeContactProvider.notifier).sendMessage({
+                    'email': value,
+                  });
+                },
+              ),
+              const SizedBox(height: 30),
+              const _TitleText(title: '_message:'),
+              const SizedBox(height: 5),
+              FormCustom(
+                isLager: true,
+                onChanged: (value) {
+                  ref.read(codeContactProvider.notifier).sendMessage({
+                    'message': value,
+                  });
+                },
+              ),
+              const SizedBox(height: 30),
+              SizedBox(
+                width: 195,
+                height: 50,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xff314158),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    onPressed: () {},
-                    child: Text(
-                      'submit-message',
-                      style: GoogleFonts.firaCode(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
+                  ),
+                  onPressed: () {},
+                  child: Text(
+                    'submit-message',
+                    style: GoogleFonts.firaCode(
+                      fontSize: 16,
+                      color: Colors.white,
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

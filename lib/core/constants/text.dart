@@ -1,6 +1,23 @@
 class TextContants {
   TextContants._();
 
+  // Home Page
+  static const String nameDeveloper = "Mario_Melo";
+  static const String profession = "Mobile Developer";
+
+  //Links
+  static const String gitHublink = "https://github.com/mariomedev";
+  static const String linkGitHubName = "@mario.melo.dev";
+  static const String linkdinLink = "https://www.linkedin.com/in/mariodev/";
+  static const String linkdinName = "mario.melo.dev";
+  static const String instagramlink =
+      "https://www.instagram.com/mariostevenm._/";
+  static const String phoneLink = "https://w.app/8qmzt6";
+  static const String youtube = "";
+
+  // contact
+  static const String phone = "+57 300 508 8310";
+  static const String email = "mario.melo.dev@gmail.com";
   // about me
   static const String bio = r"""
  /**
@@ -20,6 +37,38 @@ class TextContants {
  */
 
  """;
+  static const String interest = r"""
+ /**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ *  
+ * 
+ * 
+ */
+ """;
+  static const String education = r"""
+ /**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ *  
+ * 
+ * 
+ */
+ """;
+
+  // code
   static const String codeContact = r'''
 import 'package:flutter/material.dart';
 
