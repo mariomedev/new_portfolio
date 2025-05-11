@@ -1,49 +1,58 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/core.dart';
 
-class Brackground extends StatefulWidget {
+class Brackground extends ConsumerStatefulWidget {
   final Widget child;
   const Brackground({super.key, required this.child});
 
   @override
-  State<Brackground> createState() => _BrackgroundState();
+  ConsumerState<Brackground> createState() => _BrackgroundState();
 }
 
-class _BrackgroundState extends State<Brackground>
+class _BrackgroundState extends ConsumerState<Brackground>
     with SingleTickerProviderStateMixin {
-  Offset pointerOffset = Offset.zero;
-
   @override
   Widget build(BuildContext context) {
+    Offset pointerOffset = ref.watch(offSetProvider); // Offset(0, 0);
     return MouseRegion(
       onHover: (event) {
-        pointerOffset = event.position;
+        ref.read(offSetProvider.notifier).update((state) => event.position);
         setState(() {});
       },
       child: Scaffold(
         backgroundColor: ContanstColors.backgroudColor,
         body: Stack(
           children: [
-            Center(child: Text('Hola Mundo')),
+            const Center(child: Text('Hola Mundo')),
             AnimatedPointer(
               pointerOffset: pointerOffset,
-              radius: 45,
-            ),
-            AnimatedPointer(
-              pointerOffset: pointerOffset,
-              movementDuration: const Duration(milliseconds: 200),
-              radius: 5,
+              radius: 40,
             ),
             BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-              child: Container(
+              child: const SizedBox(
                 height: double.infinity,
                 width: double.infinity,
-                color: Colors.transparent,
               ),
+            ),
+            AnimatedPointer(
+              pointerOffset: pointerOffset,
+              movementDuration: const Duration(milliseconds: 400),
+              radius: 20,
+            ),
+            AnimatedPointer(
+              pointerOffset: pointerOffset,
+              movementDuration: const Duration(milliseconds: 400),
+              radius: 19,
+            ),
+            AnimatedPointer(
+              pointerOffset: pointerOffset,
+              movementDuration: const Duration(milliseconds: 100),
+              radius: 5,
             ),
             SizedBox(
               height: double.infinity,
@@ -88,10 +97,10 @@ class Pointer extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     canvas.drawCircle(
-      Offset(0, 0),
+      const Offset(0, 0),
       radius,
       Paint()
-        ..color = Color(0xFF00D5BE)
+        ..color = const Color(0xFF00D5BE)
         ..blendMode = BlendMode.difference,
     );
   }
@@ -101,3 +110,7 @@ class Pointer extends CustomPainter {
     return false;
   }
 }
+
+final offSetProvider = StateProvider<Offset>((ref) {
+  return const Offset(500, 500);
+});
