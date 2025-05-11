@@ -18,14 +18,14 @@ class _HeaderNavigatorState extends State<HeaderNavigator> {
     return Container(
       height: 40,
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border.symmetric(
           horizontal: BorderSide(color: Color(0xFF314158)),
         ),
       ),
       child: Row(
         children: [
-          BoxItem(title: 'Mario_Melo' , width: 361),
+          const BoxItem(title: 'Mario_Melo', width: 360),
           BoxItemNavigator(
             title: '_hello',
             isSelected: widget.index == 0 ? true : false,
@@ -50,12 +50,17 @@ class _HeaderNavigatorState extends State<HeaderNavigator> {
               setState(() {});
             },
           ),
-          Spacer(),
-          BoxItemNavigator(title: '_contact-me', isSelected: false),
+          const Spacer(),
+          BoxItemNavigator(
+            title: '_contact-me',
+            isSelected: widget.index == 3 ? true : false,
+            onTap: () {
+              context.push('/contact-me');
+              setState(() {});
+            },
+          ),
         ],
       ),
     );
   }
 }
-
-

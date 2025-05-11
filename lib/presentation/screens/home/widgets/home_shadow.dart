@@ -18,9 +18,9 @@ class HomeShadow extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: color ?? Color(0xFF00D5BE),
-            blurRadius: 300,
-            spreadRadius: 10,
+            color: color ?? const Color(0xFF00D5BE),
+            blurRadius: 400,
+            spreadRadius: 5,
           ),
         ],
         borderRadius: BorderRadius.circular(20),

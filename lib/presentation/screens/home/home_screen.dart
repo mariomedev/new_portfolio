@@ -12,11 +12,11 @@ class HomeScreen extends StatelessWidget {
       body: Brackground(
         child: Column(
           children: [
-            HeaderNavigator(
+            const HeaderNavigator(
               index: 0,
             ),
             _HomeView(),
-            Footer(),
+            const Footer(),
           ],
         ),
       ),
@@ -24,28 +24,55 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class _HomeView extends StatelessWidget {
+class _HomeView extends StatefulWidget {
+  @override
+  State<_HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<_HomeView>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 10),
+    )..repeat();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Positioned(
-            right: 300,
-            bottom: 50,
-            child: HomeShadow(
-              rotationZ: 0.7,
+          RotationTransition(
+            turns: _controller,
+            child: const HomeShadow(
               color: Color(0xFF615FFF),
             ),
           ),
-          Positioned(
-            top: 100,
-            child: HomeShadow(
-              rotationZ: -0.3,
+          RotationTransition(
+            turns: _controller,
+            child: const HomeShadow(
+              rotationZ: 0.5,
             ),
           ),
-          Row(
+          RotationTransition(
+            turns: _controller,
+            child: const HomeShadow(
+              rotationZ: -0.5,
+            ),
+          ),
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               HomeInfo(),
