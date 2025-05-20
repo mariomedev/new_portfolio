@@ -3,6 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'widgets.dart';
+
 class HomeGame extends StatelessWidget {
   const HomeGame({
     super.key,
@@ -35,27 +37,11 @@ class HomeGame extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              _GameContainer(),
+              const HomeGameContainer(),
               _GameControlsContainer(),
             ],
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _GameContainer extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    //TODO: Implement Game.
-    return Container(
-      width: 239,
-      height: double.infinity,
-      margin: const EdgeInsets.only(left: 30, top: 30, bottom: 30),
-      decoration: BoxDecoration(
-        color: const Color(0xFF1D293D),
-        borderRadius: BorderRadius.circular(20),
       ),
     );
   }
