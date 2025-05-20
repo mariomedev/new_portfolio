@@ -30,10 +30,11 @@ class _BrackgroundState extends ConsumerState<Brackground>
             const Center(child: Text('Hola Mundo')),
             AnimatedPointer(
               pointerOffset: pointerOffset,
+              movementDuration: const Duration(seconds: 2),
               radius: 40,
             ),
             BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
               child: const SizedBox(
                 height: double.infinity,
                 width: double.infinity,
@@ -41,17 +42,15 @@ class _BrackgroundState extends ConsumerState<Brackground>
             ),
             AnimatedPointer(
               pointerOffset: pointerOffset,
-              movementDuration: const Duration(milliseconds: 400),
               radius: 20,
             ),
             AnimatedPointer(
               pointerOffset: pointerOffset,
-              movementDuration: const Duration(milliseconds: 400),
               radius: 19,
             ),
             AnimatedPointer(
               pointerOffset: pointerOffset,
-              movementDuration: const Duration(milliseconds: 100),
+              movementDuration: const Duration(milliseconds: 400),
               radius: 5,
             ),
             SizedBox(
@@ -100,7 +99,7 @@ class Pointer extends CustomPainter {
       const Offset(0, 0),
       radius,
       Paint()
-        ..color = const Color(0xFF00D5BE)
+        ..color = Colors.deepOrange
         ..blendMode = BlendMode.difference,
     );
   }

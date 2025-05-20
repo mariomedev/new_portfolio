@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen>
         scale: _animationScale,
         child: Center(
           child: Image.asset(
-            'assets/img/flutter-mario.png',
+            'assets/images/flutter-mario.png',
             height: 400,
             width: 400,
           ),
