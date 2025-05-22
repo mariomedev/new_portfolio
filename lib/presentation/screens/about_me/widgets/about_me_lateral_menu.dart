@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
+import 'package:myapp/core/constants/storage/app_assets.dart';
 
 import '../../widgets/widgets.dart';
 
@@ -16,17 +17,17 @@ class AboutMeLateralMenu extends StatelessWidget {
         children: [
           const SizedBox(height: 10),
           SvgPicture.asset(
-            'assets/svg/terminal.svg',
+            AppAssets.terminalLogo,
             width: 24,
             height: 24,
           ),
           SvgPicture.asset(
-            'assets/svg/light.svg',
+            AppAssets.lightLogo,
             width: 24,
             height: 24,
           ),
           SvgPicture.asset(
-            'assets/svg/console-game.svg',
+            AppAssets.consoleGameLogo,
             width: 24,
             height: 24,
           ),

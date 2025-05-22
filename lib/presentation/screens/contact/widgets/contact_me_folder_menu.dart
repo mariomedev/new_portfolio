@@ -25,15 +25,15 @@ class ContactMeFolderMenu extends StatelessWidget {
             ),
           ),
           ButtonInfo(
-            title: TextContants.email,
+            title: AppTexts.email,
             onTap: (value) {
               //UrlLaunch.launchInBrowser();
             },
           ),
           ButtonInfo(
-            title: TextContants.phone,
+            title: AppTexts.phone,
             onTap: (value) {
-              UrlLaunch.launchInBrowser(TextContants.phoneLink);
+              UrlLaunch.launchInBrowser(AppLinks.phone);
             },
           ),
           const BoxBorderHorizontal(
@@ -48,25 +48,25 @@ class ContactMeFolderMenu extends StatelessWidget {
           ButtonInfo(
             title: 'YouTube',
             onTap: (value) {
-              UrlLaunch.launchInBrowser(TextContants.youtube);
+              UrlLaunch.launchInBrowser(AppLinks.youtube);
             },
           ),
           ButtonInfo(
             title: 'LikedIn',
             onTap: (value) {
-              UrlLaunch.launchInBrowser(TextContants.linkdinLink);
+              UrlLaunch.launchInBrowser(AppLinks.linkdin);
             },
           ),
           ButtonInfo(
             title: 'GitHub',
             onTap: (value) {
-              UrlLaunch.launchInBrowser(TextContants.gitHublink);
+              UrlLaunch.launchInBrowser(AppLinks.gitHub);
             },
           ),
           ButtonInfo(
             title: 'Instagram',
             onTap: (value) {
-              UrlLaunch.launchInBrowser(TextContants.instagramlink);
+              UrlLaunch.launchInBrowser(AppLinks.instagram);
             },
           ),
         ],

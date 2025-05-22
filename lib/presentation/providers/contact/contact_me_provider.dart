@@ -14,7 +14,7 @@ class ContactNotifier extends StateNotifier<ContactState> {
             email: '',
             message: '',
             date: '',
-            code: TextContants.codeContact)) {
+            code: AppTexts.codeContact)) {
     updateCode();
   }
 

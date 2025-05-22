@@ -30,19 +30,19 @@ class AboutMeFolderMenu extends StatelessWidget {
                   title: 'Bio',
                   arrowIsActive: true,
                   isDawer: true,
-                  pathImage: 'assets/svg/icon-folder-red.svg',
+                  pathImage: AppAssets.folderRed,
                   onTap: (value) {},
                 ),
                 ButtonInfo(
                   title: 'interests',
                   arrowIsActive: true,
-                  pathImage: 'assets/svg/icon-folder-green.svg',
+                  pathImage: AppAssets.folderGreen,
                   onTap: (value) {},
                 ),
                 ButtonInfo(
                   title: 'education',
                   arrowIsActive: true,
-                  pathImage: 'assets/svg/icon-folder-blue.svg',
+                  pathImage: AppAssets.folderBlue,
                   onTap: (value) {},
                 ),
                 const SizedBox(height: 10),
@@ -63,23 +63,23 @@ class AboutMeFolderMenu extends StatelessWidget {
             children: [
               const SizedBox(height: 10),
               ButtonInfo(
-                title: TextContants.email,
-                pathImage: 'assets/svg/email.svg',
+                title: AppTexts.email,
+                pathImage: AppAssets.emailLogo,
                 onTap: (value) {},
               ),
               ButtonInfo(
-                title: TextContants.phone,
-                pathImage: 'assets/svg/phone.svg',
+                title: AppTexts.phone,
+                pathImage: AppAssets.phoneLogo,
                 isDawer: false,
                 onTap: (value) {
-                  UrlLaunch.launchInBrowser(TextContants.phoneLink);
+                  UrlLaunch.launchInBrowser(AppLinks.phone);
                 },
               ),
               ButtonInfo(
-                title: TextContants.linkdinName,
-                pathImage: 'assets/svg/linkedin.svg',
+                title: AppTexts.linkdinName,
+                pathImage: AppAssets.linkedinLogo,
                 onTap: (value) {
-                  UrlLaunch.launchInBrowser(TextContants.linkdinLink);
+                  UrlLaunch.launchInBrowser(AppLinks.linkdin);
                 },
               ),
             ],

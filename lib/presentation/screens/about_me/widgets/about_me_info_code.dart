@@ -12,7 +12,7 @@ class AboutMeFileCode extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: SyntaxView(
-          code: TextContants.bio,
+          code: AppTexts.bio,
           syntax: Syntax.DART,
           syntaxTheme: myCustomTheme,
           fontSize: 18.0,

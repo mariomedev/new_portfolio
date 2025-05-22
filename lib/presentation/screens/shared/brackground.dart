@@ -24,7 +24,7 @@ class _BrackgroundState extends ConsumerState<Brackground>
         setState(() {});
       },
       child: Scaffold(
-        backgroundColor: ContanstColors.backgroudColor,
+        backgroundColor: AppColors.backgroudColor,
         body: Stack(
           children: [
             const Center(child: Text('Hola Mundo')),

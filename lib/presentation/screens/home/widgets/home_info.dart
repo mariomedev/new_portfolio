@@ -24,7 +24,7 @@ class HomeInfo extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          TextContants.nameDeveloper,
+          AppTexts.nameDeveloper,
           style: textStyle.copyWith(
             fontSize: 80,
             color: Colors.white,
@@ -32,7 +32,7 @@ class HomeInfo extends StatelessWidget {
           ),
         ),
         Text(
-          '> ${TextContants.profession}',
+          '> ${AppTexts.profession}',
           style: textStyle.copyWith(
             fontSize: 40,
             color: const Color(0xFF615FFF),
@@ -79,10 +79,10 @@ class HomeInfo extends StatelessWidget {
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
                 onTap: () {
-                  UrlLaunch.launchInBrowser(TextContants.gitHublink);
+                  UrlLaunch.launchInBrowser(AppLinks.gitHub);
                 },
                 child: Text(
-                  TextContants.gitHublink,
+                  AppTexts.gitHub,
                   style: textStyle.copyWith(
                       fontSize: 20, color: const Color(0xFFFFA1AD)),
                 ),

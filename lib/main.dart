@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'portafolio',
+      title: 'Mario_Melo_Dev',
       routerConfig: router,
     );
   }

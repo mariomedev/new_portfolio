@@ -27,7 +27,7 @@ class _HeaderNavigatorState extends State<HeaderNavigator> {
       child: Row(
         children: [
           const BoxItem(
-            title: TextContants.nameDeveloper,
+            title: AppTexts.nameDeveloper,
             width: 360,
           ),
           BoxItemNavigator(

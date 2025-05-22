@@ -28,7 +28,7 @@ class Footer extends StatelessWidget {
           ),
           BoxItemNavigator(
             width: 50,
-            imagePath: 'assets/svg/linkedin.svg',
+            imagePath: AppAssets.linkedinLogo,
           ),
           Spacer(),
           BoxItem(
@@ -37,8 +37,8 @@ class Footer extends StatelessWidget {
           ),
           Spacer(),
           BoxItemNavigator(
-            title: TextContants.linkGitHubName,
-            imagePath: 'assets/svg/git.svg',
+            title: AppTexts.linkGitHubName,
+            imagePath: AppAssets.gitLogo,
             width: 200,
           ),
         ],

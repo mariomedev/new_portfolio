@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/core/core.dart';
 
 import '../shared/shared.dart';
 
@@ -47,15 +49,28 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = GoogleFonts.firaCode();
     return Brackground(
       child: ScaleTransition(
         scale: _animationScale,
-        child: Center(
-          child: Image.asset(
-            'assets/images/flutter-mario.png',
-            height: 400,
-            width: 400,
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          spacing: 20,
+          children: [
+            Image.asset(
+              AppAssets.logoSplash,
+              height: 300,
+              width: 300,
+            ),
+            Text(
+              AppTexts.nameDeveloper,
+              style: textStyle.copyWith(
+                fontSize: 50,
+                color: const Color(0xFF615FFF),
+              ),
+            )
+          ],
         ),
       ),
     );
