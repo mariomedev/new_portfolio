@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:myapp/core/core.dart';
+import 'package:myapp/presentation/providers/url/url_provider.dart';
 import '../../widgets/widgets.dart';
 
-class ContactMeFolderMenu extends StatelessWidget {
+class ContactMeFolderMenu extends ConsumerWidget {
   const ContactMeFolderMenu({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final urlLaunch = ref.watch(urlProvider);
     return BoxBorderVertical(
       width: 320,
       child: Column(
@@ -27,13 +30,13 @@ class ContactMeFolderMenu extends StatelessWidget {
           ButtonInfo(
             title: AppTexts.email,
             onTap: (value) {
-              //UrlLaunch.launchInBrowser();
+              urlLaunch.launchInBrowser(AppLinks.email);
             },
           ),
           ButtonInfo(
             title: AppTexts.phone,
             onTap: (value) {
-              UrlLaunch.launchInBrowser(AppLinks.phone);
+              urlLaunch.launchInBrowser(AppLinks.phone);
             },
           ),
           const BoxBorderHorizontal(
@@ -48,25 +51,25 @@ class ContactMeFolderMenu extends StatelessWidget {
           ButtonInfo(
             title: 'YouTube',
             onTap: (value) {
-              UrlLaunch.launchInBrowser(AppLinks.youtube);
+              urlLaunch.launchInBrowser(AppLinks.youtube);
             },
           ),
           ButtonInfo(
             title: 'LikedIn',
             onTap: (value) {
-              UrlLaunch.launchInBrowser(AppLinks.linkdin);
+              urlLaunch.launchInBrowser(AppLinks.linkdin);
             },
           ),
           ButtonInfo(
             title: 'GitHub',
             onTap: (value) {
-              UrlLaunch.launchInBrowser(AppLinks.gitHub);
+              urlLaunch.launchInBrowser(AppLinks.gitHub);
             },
           ),
           ButtonInfo(
             title: 'Instagram',
             onTap: (value) {
-              UrlLaunch.launchInBrowser(AppLinks.instagram);
+              urlLaunch.launchInBrowser(AppLinks.instagram);
             },
           ),
         ],

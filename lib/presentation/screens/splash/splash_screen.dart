@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen>
     );
     _animationScale.addListener(() {
       if (_animationScale.isCompleted) {
-        context.push('/home');
+        context.go('/home');
       }
     });
 

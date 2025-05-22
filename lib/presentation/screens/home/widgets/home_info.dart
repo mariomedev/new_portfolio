@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/presentation/providers/url/url_provider.dart';
 
 import '../../../../core/core.dart';
 
-class HomeInfo extends StatelessWidget {
+class HomeInfo extends ConsumerWidget {
   const HomeInfo({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final textStyle = GoogleFonts.firaCode();
+    final urlLaunch = ref.watch(urlProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -79,7 +82,7 @@ class HomeInfo extends StatelessWidget {
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
                 onTap: () {
-                  UrlLaunch.launchInBrowser(AppLinks.gitHub);
+                  urlLaunch.launchInBrowser(AppLinks.gitHub);
                 },
                 child: Text(
                   AppTexts.gitHub,

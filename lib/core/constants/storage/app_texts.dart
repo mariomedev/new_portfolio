@@ -2,7 +2,7 @@ class AppTexts {
   AppTexts._();
 
   //home Screen
-  static const String linkGitHubName = "@mario.melo.dev";
+  static const String linkGitHubName = " @mario.melo.dev";
   static const String linkdinName = "mario.melo.dev";
   static const String profession = "Mobile Developer";
   static const String nameDeveloper = "Mario_Melo";

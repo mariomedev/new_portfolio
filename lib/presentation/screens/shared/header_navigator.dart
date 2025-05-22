@@ -34,7 +34,7 @@ class _HeaderNavigatorState extends State<HeaderNavigator> {
             title: '_hello',
             isSelected: widget.index == 0 ? true : false,
             onTap: () {
-              context.push('/home');
+              context.go('/home');
               setState(() {});
             },
           ),
@@ -42,7 +42,7 @@ class _HeaderNavigatorState extends State<HeaderNavigator> {
             title: '_about-me',
             isSelected: widget.index == 1 ? true : false,
             onTap: () {
-              context.push('/about-me');
+              context.go('/about-me');
               setState(() {});
             },
           ),
@@ -50,7 +50,7 @@ class _HeaderNavigatorState extends State<HeaderNavigator> {
             title: '_projects',
             isSelected: widget.index == 2 ? true : false,
             onTap: () {
-              context.push('/projects');
+              context.go('/projects');
               setState(() {});
             },
           ),
@@ -59,7 +59,7 @@ class _HeaderNavigatorState extends State<HeaderNavigator> {
             title: '_contact-me',
             isSelected: widget.index == 3 ? true : false,
             onTap: () {
-              context.push('/contact-me');
+              context.go('/contact-me');
               setState(() {});
             },
           ),

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myapp/presentation/providers/url/url_provider.dart';
 
 import '../../../../core/core.dart';
 import '../../widgets/widgets.dart';
 
-class AboutMeFolderMenu extends StatelessWidget {
+class AboutMeFolderMenu extends ConsumerWidget {
   const AboutMeFolderMenu({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final urlLaunch = ref.watch(urlProvider);
     return BoxBorderVertical(
       width: 330,
       child: Column(
@@ -65,21 +68,23 @@ class AboutMeFolderMenu extends StatelessWidget {
               ButtonInfo(
                 title: AppTexts.email,
                 pathImage: AppAssets.emailLogo,
-                onTap: (value) {},
+                onTap: (value) {
+                  urlLaunch.launchInBrowser(AppLinks.email);
+                },
               ),
               ButtonInfo(
                 title: AppTexts.phone,
                 pathImage: AppAssets.phoneLogo,
                 isDawer: false,
                 onTap: (value) {
-                  UrlLaunch.launchInBrowser(AppLinks.phone);
+                  urlLaunch.launchInBrowser(AppLinks.phone);
                 },
               ),
               ButtonInfo(
                 title: AppTexts.linkdinName,
                 pathImage: AppAssets.linkedinLogo,
                 onTap: (value) {
-                  UrlLaunch.launchInBrowser(AppLinks.linkdin);
+                  urlLaunch.launchInBrowser(AppLinks.linkdin);
                 },
               ),
             ],

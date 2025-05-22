@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myapp/core/core.dart';
+import 'package:myapp/presentation/providers/url/url_provider.dart';
 
 import 'package:myapp/presentation/screens/widgets/widgets.dart';
 
-class Footer extends StatelessWidget {
+class Footer extends ConsumerWidget {
   const Footer({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final urlLaunch = ref.watch(urlProvider);
     return Container(
       height: 40,
       width: double.infinity,
@@ -20,26 +23,32 @@ class Footer extends StatelessWidget {
           ),
         ),
       ),
-      child: const Row(
+      child: Row(
         children: [
-          BoxItem(
+          const BoxItem(
             title: 'Find-me-in:',
             width: 150,
           ),
           BoxItemNavigator(
             width: 50,
             imagePath: AppAssets.linkedinLogo,
+            onTap: () {
+              urlLaunch.launchInBrowser(AppLinks.linkdin);
+            },
           ),
-          Spacer(),
-          BoxItem(
+          const Spacer(),
+          const BoxItem(
             title: 'Made-with-Flutter',
             width: 200,
           ),
-          Spacer(),
+          const Spacer(),
           BoxItemNavigator(
             title: AppTexts.linkGitHubName,
             imagePath: AppAssets.gitLogo,
             width: 200,
+            onTap: () {
+              urlLaunch.launchInBrowser(AppLinks.gitHub);
+            },
           ),
         ],
       ),
