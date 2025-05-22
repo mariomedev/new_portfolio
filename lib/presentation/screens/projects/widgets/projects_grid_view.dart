@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../domain/domain.dart';
 import '../../widgets/widgets.dart';
 import 'widgets.dart';
 
@@ -12,17 +13,24 @@ class ProjectsGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const FileOpen(title: 'Flutter'),
-          Expanded(
-            child: GridView.builder(
-              itemCount: 10,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-              ),
+          Flexible(
+            fit: FlexFit.loose,
+            child: ListView.builder(
+              itemCount: projectList.length,
               itemBuilder: (context, index) {
-                return const ProjectsCard();
+                final project = projectList[index];
+                return ProjectsCard(
+                  index: index,
+                  title: project.title,
+                  imagePath: project.imagePath,
+                  description: project.description,
+                  linkGitRepo: project.linkGitRepo,
+                  linkDemo: project.linkDemo,
+                );
               },
             ),
           )

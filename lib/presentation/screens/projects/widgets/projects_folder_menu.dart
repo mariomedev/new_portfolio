@@ -35,21 +35,6 @@ class ProjectsFolderMenu extends StatelessWidget {
                   pathImage: 'assets/svg/icon-flutter.svg',
                   onPressed: (value) {},
                 ),
-                CheckBoxTechnology(
-                  tilte: 'Angular',
-                  pathImage: 'assets/svg/icon-angular.svg',
-                  onPressed: (value) {},
-                ),
-                CheckBoxTechnology(
-                  tilte: 'CSS',
-                  pathImage: 'assets/svg/icon-css.svg',
-                  onPressed: (value) {},
-                ),
-                CheckBoxTechnology(
-                  tilte: 'HTML',
-                  pathImage: 'assets/svg/icon-html.svg',
-                  onPressed: (value) {},
-                ),
               ],
             ),
           )
@@ -101,7 +86,7 @@ class _CheckBoxTechnologyState extends State<CheckBoxTechnology> {
         Checkbox(
           checkColor: Colors.white,
           fillColor: WidgetStateProperty.resolveWith(getColor),
-          value: _isSeleted,
+          value: true,
           onChanged: (value) {
             _isSeleted = value;
             widget.onPressed?.call(value!);
