@@ -8,7 +8,7 @@ class ButtonInfo extends StatefulWidget {
   final bool? isDawer;
   final bool? isSelected;
   final String? pathImage;
-  final ValueChanged<bool>? onTap;
+  final void Function()? onTap;
 
   const ButtonInfo({
     super.key,
@@ -17,7 +17,7 @@ class ButtonInfo extends StatefulWidget {
     this.arrowIsActive = false,
     this.pathImage,
     this.onTap,
-    this.isSelected,
+    this.isSelected = false,
   });
 
   @override
@@ -25,26 +25,10 @@ class ButtonInfo extends StatefulWidget {
 }
 
 class _ButtonInfoState extends State<ButtonInfo> {
-  bool _isSeleted = false;
-
-  @override
-  void initState() {
-    if (widget.isSelected != null) {
-      _isSeleted = widget.isSelected!;
-    }
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        if (widget.onTap != null) {
-          widget.onTap!(!_isSeleted);
-          _isSeleted = !_isSeleted;
-        }
-        setState(() {});
-      },
+      onTap: widget.onTap,
       child: Row(
         spacing: 10,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -52,7 +36,9 @@ class _ButtonInfoState extends State<ButtonInfo> {
           const SizedBox(width: 20),
           if (widget.arrowIsActive!)
             Icon(
-              _isSeleted ? Icons.arrow_drop_down_rounded : Icons.arrow_right,
+              widget.isSelected!
+                  ? Icons.arrow_drop_down_rounded
+                  : Icons.arrow_right,
               color: Colors.white,
             ),
           if (widget.pathImage != null)
@@ -67,7 +53,7 @@ class _ButtonInfoState extends State<ButtonInfo> {
               widget.title,
               style: GoogleFonts.firaCode(
                 color: widget.isDawer!
-                    ? (_isSeleted)
+                    ? (widget.isSelected!)
                         ? Colors.white
                         : const Color(0xFF90A1B9)
                     : const Color(0xFF90A1B9),

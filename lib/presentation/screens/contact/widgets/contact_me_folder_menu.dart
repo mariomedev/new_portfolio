@@ -29,13 +29,13 @@ class ContactMeFolderMenu extends ConsumerWidget {
           ),
           ButtonInfo(
             title: AppTexts.email,
-            onTap: (value) {
+            onTap: () {
               urlLaunch.launchInBrowser(AppLinks.email);
             },
           ),
           ButtonInfo(
             title: AppTexts.phone,
-            onTap: (value) {
+            onTap: () {
               urlLaunch.launchInBrowser(AppLinks.phone);
             },
           ),
@@ -50,25 +50,25 @@ class ContactMeFolderMenu extends ConsumerWidget {
           ),
           ButtonInfo(
             title: 'YouTube',
-            onTap: (value) {
+            onTap: () {
               urlLaunch.launchInBrowser(AppLinks.youtube);
             },
           ),
           ButtonInfo(
             title: 'LikedIn',
-            onTap: (value) {
+            onTap: () {
               urlLaunch.launchInBrowser(AppLinks.linkdin);
             },
           ),
           ButtonInfo(
             title: 'GitHub',
-            onTap: (value) {
+            onTap: () {
               urlLaunch.launchInBrowser(AppLinks.gitHub);
             },
           ),
           ButtonInfo(
             title: 'Instagram',
-            onTap: (value) {
+            onTap: () {
               urlLaunch.launchInBrowser(AppLinks.instagram);
             },
           ),

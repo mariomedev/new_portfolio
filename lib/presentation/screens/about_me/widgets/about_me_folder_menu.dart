@@ -1,15 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myapp/presentation/providers/about_me/about_me_provider.dart';
 import 'package:myapp/presentation/providers/url/url_provider.dart';
 
 import '../../../../core/core.dart';
 import '../../widgets/widgets.dart';
 
-class AboutMeFolderMenu extends ConsumerWidget {
+class AboutMeFolderMenu extends ConsumerStatefulWidget {
   const AboutMeFolderMenu({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<AboutMeFolderMenu> createState() => _AboutMeFolderMenuState();
+}
+
+class _AboutMeFolderMenuState extends ConsumerState<AboutMeFolderMenu> {
+  int _itemSeleted = 0;
+  void _changeItem(int value) {
+    setState(() {
+      _itemSeleted = value;
+    });
+  }
+
+  void _chageCode(String code) {
+    ref.read(aboutMeProvider.notifier).update((state) => code);
+  }
+
+  void _chageName(String name) {
+    ref.read(aboutMeNameProvider.notifier).update((state) => name);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final urlLaunch = ref.watch(urlProvider);
     return BoxBorderVertical(
       width: 330,
@@ -30,23 +51,52 @@ class AboutMeFolderMenu extends ConsumerWidget {
               children: [
                 const SizedBox(height: 10),
                 ButtonInfo(
-                  title: 'Bio',
+                  title: 'bio',
                   arrowIsActive: true,
-                  isDawer: true,
+                  isSelected: _itemSeleted == 0,
+                  isDawer: _itemSeleted == 0,
                   pathImage: AppAssets.folderRed,
-                  onTap: (value) {},
+                  onTap: () {
+                    _changeItem(0);
+                    _chageCode(AppTexts.bio);
+                    _chageName('bio');
+                  },
                 ),
                 ButtonInfo(
                   title: 'interests',
                   arrowIsActive: true,
+                  isSelected: _itemSeleted == 1,
+                  isDawer: _itemSeleted == 1,
                   pathImage: AppAssets.folderGreen,
-                  onTap: (value) {},
+                  onTap: () {
+                    _changeItem(1);
+                    _chageCode(AppTexts.interest);
+                    _chageName('interests');
+                  },
                 ),
                 ButtonInfo(
                   title: 'education',
                   arrowIsActive: true,
+                  isSelected: _itemSeleted == 2,
+                  isDawer: _itemSeleted == 2,
                   pathImage: AppAssets.folderBlue,
-                  onTap: (value) {},
+                  onTap: () {
+                    _changeItem(2);
+                    _chageCode(AppTexts.education);
+                    _chageName('education');
+                  },
+                ),
+                ButtonInfo(
+                  title: 'experience',
+                  arrowIsActive: true,
+                  isSelected: _itemSeleted == 3,
+                  isDawer: _itemSeleted == 3,
+                  pathImage: AppAssets.folderBlue,
+                  onTap: () {
+                    _changeItem(3);
+                    _chageCode(AppTexts.experience);
+                    _chageName('experience');
+                  },
                 ),
                 const SizedBox(height: 10),
               ],
@@ -68,7 +118,7 @@ class AboutMeFolderMenu extends ConsumerWidget {
               ButtonInfo(
                 title: AppTexts.email,
                 pathImage: AppAssets.emailLogo,
-                onTap: (value) {
+                onTap: () {
                   urlLaunch.launchInBrowser(AppLinks.email);
                 },
               ),
@@ -76,14 +126,14 @@ class AboutMeFolderMenu extends ConsumerWidget {
                 title: AppTexts.phone,
                 pathImage: AppAssets.phoneLogo,
                 isDawer: false,
-                onTap: (value) {
+                onTap: () {
                   urlLaunch.launchInBrowser(AppLinks.phone);
                 },
               ),
               ButtonInfo(
                 title: AppTexts.linkdinName,
                 pathImage: AppAssets.linkedinLogo,
-                onTap: (value) {
+                onTap: () {
                   urlLaunch.launchInBrowser(AppLinks.linkdin);
                 },
               ),
