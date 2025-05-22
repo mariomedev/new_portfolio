@@ -100,6 +100,9 @@ class CosmicGame extends FlameGame with KeyboardEvents {
     if (logicalKeyboardKey.contains(LogicalKeyboardKey.arrowDown)) {
       rocket.position.add(Vector2(0, 8));
     }
+    if (logicalKeyboardKey.contains(LogicalKeyboardKey.space)) {
+      rocket.startShooting();
+    }
     return super.onKeyEvent(event, keysPressed);
   }
 }
