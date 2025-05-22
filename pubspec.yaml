@@ -32,6 +32,7 @@ dependencies:
   flame: ^1.28.1
   flutter:
     sdk: flutter
+  flutter_launcher_icons: ^0.14.3
   flutter_riverpod: ^2.6.1
   flutter_svg: ^2.1.0
   flutter_syntax_view: ^4.1.7
