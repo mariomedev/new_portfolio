@@ -16,8 +16,8 @@ class ProjectsScreen extends StatelessWidget {
             Expanded(
               child: Row(
                 children: [
-                  ProjectsFolderMenu(),
-                  ProjectsGridView(),
+                  //ProjectsFolderMenu(),
+                  ProjectsListView(),
                 ],
               ),
             ),
@@ -28,4 +28,3 @@ class ProjectsScreen extends StatelessWidget {
     );
   }
 }
-

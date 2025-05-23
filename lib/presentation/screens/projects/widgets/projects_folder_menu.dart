@@ -76,7 +76,7 @@ class _CheckBoxTechnologyState extends State<CheckBoxTechnology> {
     return Colors.transparent;
   }
 
-  bool? _isSeleted = false;
+  // bool? _isSeleted ;
 
   @override
   Widget build(BuildContext context) {
@@ -88,9 +88,9 @@ class _CheckBoxTechnologyState extends State<CheckBoxTechnology> {
           fillColor: WidgetStateProperty.resolveWith(getColor),
           value: true,
           onChanged: (value) {
-            _isSeleted = value;
-            widget.onPressed?.call(value!);
-            setState(() {});
+            // _isSeleted = value;
+            // widget.onPressed?.call(value!);
+            // setState(() {});
           },
         ),
         const SizedBox(width: 20),

@@ -4,8 +4,8 @@ import '../../../domain/domain.dart';
 import '../../widgets/widgets.dart';
 import 'widgets.dart';
 
-class ProjectsGridView extends StatelessWidget {
-  const ProjectsGridView({
+class ProjectsListView extends StatelessWidget {
+  const ProjectsListView({
     super.key,
   });
 
