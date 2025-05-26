@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/core/core.dart';
 import 'package:myapp/presentation/providers/providers.dart';
 
 class ProjectsCard extends StatelessWidget {
@@ -181,7 +182,7 @@ class _ImageCard extends StatelessWidget {
         child: FadeInImage(
           height: double.infinity,
           width: double.infinity,
-          placeholder: const AssetImage('assets/img/loading.gif'),
+          placeholder: const AssetImage(AppAssets.loading),
           image: AssetImage(imagePath),
           fit: BoxFit.cover,
         ),

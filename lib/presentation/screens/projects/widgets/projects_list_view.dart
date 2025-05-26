@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../domain/domain.dart';
+import '../../../../domain/domain.dart';
 import '../../widgets/widgets.dart';
 import 'widgets.dart';
 
