@@ -168,7 +168,7 @@ class _ImageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 2,
+      flex: ScreenManage.isTablet(context) ? 1 : 2,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(

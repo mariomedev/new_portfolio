@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/presentation/providers/contact/contact_form_provider.dart';
 
+import '../../../../core/core.dart';
 import '../../../providers/providers.dart';
 import '../../widgets/widgets.dart';
 
@@ -38,7 +39,14 @@ class _ContactMeFormState extends ConsumerState<ContactMeForm> {
     return Expanded(
       child: BoxBorderVertical(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 200),
+          padding: EdgeInsets.symmetric(
+            horizontal: ScreenManage.responsiveValue(
+              context,
+              mobile: 10,
+              desktop: 100,
+              tablet: 50,
+            ),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
