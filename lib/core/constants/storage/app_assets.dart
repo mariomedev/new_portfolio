@@ -12,4 +12,5 @@ class AppAssets {
   static const String terminalLogo = "assets/svg/terminal.svg";
   static const String lightLogo = "assets/svg/light.svg";
   static const String consoleGameLogo = "assets/svg/console-game.svg";
+  static const String loading = "assets/images/loading.gif";
 }
