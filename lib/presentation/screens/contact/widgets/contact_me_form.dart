@@ -2,17 +2,39 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/presentation/providers/contact/contact_form_provider.dart';
 
 import '../../../providers/providers.dart';
 import '../../widgets/widgets.dart';
 
-class ContactMeForm extends ConsumerWidget {
+class ContactMeForm extends ConsumerStatefulWidget {
   const ContactMeForm({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ContactMeForm> createState() => _ContactMeFormState();
+}
+
+class _ContactMeFormState extends ConsumerState<ContactMeForm> {
+  @override
+  Widget build(BuildContext context) {
+    final errorMail = ref.watch(contactFormProviderstate);
+
+    /* ref.listen(
+      contactFormProviderstate,
+      (previous, next) {
+        if (next.email.errorMessage!.isEmpty) return;
+        if (previous!.email.errorMessage! == next.email.errorMessage!) return;
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(next.email.errorMessage!),
+            backgroundColor: Colors.red,
+          ),
+        );
+      },
+    ); */
     return Expanded(
       child: BoxBorderVertical(
         child: Padding(
@@ -28,6 +50,7 @@ class ContactMeForm extends ConsumerWidget {
                   ref.read(codeContactProvider.notifier).sendMessage({
                     'name': value,
                   });
+                  ref.read(contactFormProviderstate.notifier).setEmail(value);
                 },
               ),
               const SizedBox(height: 30),
@@ -38,7 +61,10 @@ class ContactMeForm extends ConsumerWidget {
                   ref.read(codeContactProvider.notifier).sendMessage({
                     'email': value,
                   });
+                  ref.read(contactFormProviderstate.notifier).setEmail(value);
                 },
+                errotex:
+                    errorMail.isPosted ? errorMail.email.errorMessage : null,
               ),
               const SizedBox(height: 30),
               const _TitleText(title: '_message:'),
@@ -49,6 +75,7 @@ class ContactMeForm extends ConsumerWidget {
                   ref.read(codeContactProvider.notifier).sendMessage({
                     'message': value,
                   });
+                  ref.read(contactFormProviderstate.notifier).setMessage(value);
                 },
               ),
               const SizedBox(height: 30),
@@ -62,7 +89,11 @@ class ContactMeForm extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () async {
+                    await ref
+                        .read(contactFormProviderstate.notifier)
+                        .submitForm();
+                  },
                   child: Text(
                     'submit-message',
                     style: GoogleFonts.firaCode(
@@ -82,11 +113,13 @@ class ContactMeForm extends ConsumerWidget {
 
 class FormCustom extends StatelessWidget {
   final bool? isLager;
+  final String? errotex;
   final Function(String)? onChanged;
   const FormCustom({
     this.isLager,
     this.onChanged,
     super.key,
+    this.errotex,
   });
 
   @override
@@ -103,6 +136,7 @@ class FormCustom extends StatelessWidget {
               color: Color(0xff90A1B9),
             ),
           ),
+          errorText: errotex,
         ),
         style: GoogleFonts.firaCode(
           fontSize: 18,
