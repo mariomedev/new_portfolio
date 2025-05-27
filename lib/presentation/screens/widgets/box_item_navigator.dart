@@ -9,6 +9,7 @@ class BoxItemNavigator extends StatelessWidget {
   final Function()? onTap;
   final double? width;
   final String? imagePath;
+  final IconData? icon;
 
   const BoxItemNavigator({
     super.key,
@@ -17,6 +18,7 @@ class BoxItemNavigator extends StatelessWidget {
     this.onTap,
     this.width,
     this.imagePath,
+    this.icon,
   });
 
   @override
@@ -47,15 +49,19 @@ class BoxItemNavigator extends StatelessWidget {
                         color: const Color(0xFF90A1B9),
                       ),
                     ),
-                  if (imagePath != null && title != null) 
+                  if (icon != null)
+                    Icon(
+                      icon,
+                      color: const Color(0xFF90A1B9),
+                    ),
+                  if (imagePath != null && title != null)
                     const SizedBox(width: 10),
-                  if (imagePath != null) 
+                  if (imagePath != null)
                     SvgPicture.asset(
                       imagePath!,
                       height: 24,
                       width: 24,
                     ),
-                  
                 ],
               ),
               const Spacer(),
