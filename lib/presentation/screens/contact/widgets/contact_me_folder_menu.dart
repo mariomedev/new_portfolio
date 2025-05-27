@@ -14,7 +14,7 @@ class ContactMeFolderMenu extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final urlLaunch = ref.watch(urlProvider);
     return BoxBorderVertical(
-      width: 320,
+      width: ScreenManage.isMobile(context) ? double.infinity : 320,
       child: Column(
         spacing: 10,
         children: [
@@ -72,6 +72,7 @@ class ContactMeFolderMenu extends ConsumerWidget {
               urlLaunch.launchInBrowser(AppLinks.instagram);
             },
           ),
+          const SizedBox(height: 5)
         ],
       ),
     );

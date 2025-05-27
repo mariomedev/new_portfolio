@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/core/helpers/screen_manage.dart';
 
 import 'widgets.dart';
 
@@ -12,9 +13,15 @@ class HomeGame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDesktop = ScreenManage.isDesktop(context);
     return Container(
       width: 500,
-      height: 470,
+      height: ScreenManage.responsiveValue(
+        context,
+        mobile: 600,
+        desktop: 475,
+        tablet: 500,
+      ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         gradient: LinearGradient(
@@ -33,14 +40,16 @@ class HomeGame extends StatelessWidget {
           Positioned(top: 5, right: 5, child: _Dot()),
           Positioned(bottom: 5, right: 5, child: _Dot()),
           Positioned(bottom: 5, left: 5, child: _Dot()),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const HomeGameContainer(),
-              _GameControlsContainer(),
-            ],
-          ),
+          if (!isDesktop) const Positioned.fill(child: HomeGameContainer()),
+          if (isDesktop)
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const HomeGameContainer(),
+                _GameControlsContainer(),
+              ],
+            ),
         ],
       ),
     );

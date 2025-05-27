@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/core/helpers/screen_manage.dart';
 
 import '../shared/shared.dart';
 import 'widgets/widgets.dart';
@@ -8,20 +9,25 @@ class ContactScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    final isDesktop = ScreenManage.isDesktop(context);
+    final isTablet = ScreenManage.isTablet(context);
+    return Scaffold(
       body: Brackground(
         child: Column(
           children: [
-            HeaderNavigator(index: 3),
-            Expanded(
-              child: Row(
-                children: [
-                  ContactMeFolderMenu(),
-                  ContactMeCodeSection(),
-                ],
+            const HeaderNavigator(index: 3),
+            if (isDesktop || isTablet)
+              const Expanded(
+                child: Row(
+                  children: [
+                    ContactMeFolderMenu(),
+                    ContactMeCodeSection(),
+                  ],
+                ),
               ),
-            ),
-            Footer(),
+            if (!isDesktop && !isTablet) const ContactMeCodeSection(),
+            //if (!isDesktop && !isTablet) const ContactMeFolderMenu(),
+            const Footer(),
           ],
         ),
       ),

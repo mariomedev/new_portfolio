@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/core/core.dart';
 
 import '../shared/shared.dart';
 import 'widgets/widgets.dart';
@@ -8,16 +9,18 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Brackground(
-        child: Column(
-          children: [
-            const HeaderNavigator(
-              index: 0,
-            ),
-            _HomeView(),
-            const Footer(),
-          ],
+    return SafeArea(
+      child: Scaffold(
+        body: Brackground(
+          child: Column(
+            children: [
+              const HeaderNavigator(
+                index: 0,
+              ),
+              _HomeView(),
+              const Footer(),
+            ],
+          ),
         ),
       ),
     );
@@ -50,6 +53,7 @@ class _HomeViewState extends State<_HomeView>
 
   @override
   Widget build(BuildContext context) {
+    final bool isDesktop = ScreenManage.isDesktop(context);
     return Expanded(
       child: Stack(
         alignment: Alignment.center,
@@ -72,14 +76,30 @@ class _HomeViewState extends State<_HomeView>
               rotationZ: -0.5,
             ),
           ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              HomeInfo(),
-              SizedBox(width: 50),
-              HomeGame(),
-            ],
-          ),
+          if (isDesktop)
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                HomeInfo(),
+                SizedBox(width: 50),
+                HomeGame(),
+              ],
+            ),
+          if (!isDesktop)
+            const SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Column(
+                  spacing: 50,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FittedBox(child: HomeInfo()),
+                    HomeGame(),
+                    //Footer(),
+                  ],
+                ),
+              ),
+            ),
         ],
       ),
     );

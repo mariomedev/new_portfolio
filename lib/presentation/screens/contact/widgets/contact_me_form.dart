@@ -7,6 +7,7 @@ import 'package:myapp/presentation/providers/contact/contact_form_provider.dart'
 import '../../../../core/core.dart';
 import '../../../providers/providers.dart';
 import '../../widgets/widgets.dart';
+import 'widgets.dart';
 
 class ContactMeForm extends ConsumerStatefulWidget {
   const ContactMeForm({
@@ -20,6 +21,8 @@ class ContactMeForm extends ConsumerStatefulWidget {
 class _ContactMeFormState extends ConsumerState<ContactMeForm> {
   @override
   Widget build(BuildContext context) {
+    final isDesktop = ScreenManage.isDesktop(context);
+    final isTablet = ScreenManage.isTablet(context);
     final errorMail = ref.watch(contactFormProviderstate);
 
     /* ref.listen(
@@ -38,7 +41,8 @@ class _ContactMeFormState extends ConsumerState<ContactMeForm> {
     ); */
     return Expanded(
       child: BoxBorderVertical(
-        child: Padding(
+        height: double.infinity,
+        child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(
             horizontal: ScreenManage.responsiveValue(
               context,
@@ -46,72 +50,85 @@ class _ContactMeFormState extends ConsumerState<ContactMeForm> {
               desktop: 100,
               tablet: 50,
             ),
+            vertical: ScreenManage.responsiveValue(
+              context,
+              mobile: 10,
+              desktop: 100,
+              tablet: 50,
+            ),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const _TitleText(title: '_name:'),
-              const SizedBox(height: 5),
-              FormCustom(
-                onChanged: (value) {
-                  ref.read(codeContactProvider.notifier).sendMessage({
-                    'name': value,
-                  });
-                  ref.read(contactFormProviderstate.notifier).setEmail(value);
-                },
-              ),
-              const SizedBox(height: 30),
-              const _TitleText(title: '_email:'),
-              const SizedBox(height: 5),
-              FormCustom(
-                onChanged: (value) {
-                  ref.read(codeContactProvider.notifier).sendMessage({
-                    'email': value,
-                  });
-                  ref.read(contactFormProviderstate.notifier).setEmail(value);
-                },
-                errotex:
-                    errorMail.isPosted ? errorMail.email.errorMessage : null,
-              ),
-              const SizedBox(height: 30),
-              const _TitleText(title: '_message:'),
-              const SizedBox(height: 5),
-              FormCustom(
-                isLager: true,
-                onChanged: (value) {
-                  ref.read(codeContactProvider.notifier).sendMessage({
-                    'message': value,
-                  });
-                  ref.read(contactFormProviderstate.notifier).setMessage(value);
-                },
-              ),
-              const SizedBox(height: 30),
-              SizedBox(
-                width: 195,
-                height: 50,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff314158),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  onPressed: () async {
-                    await ref
-                        .read(contactFormProviderstate.notifier)
-                        .submitForm();
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const _TitleText(title: '_name:'),
+                const SizedBox(height: 5),
+                FormCustom(
+                  onChanged: (value) {
+                    ref.read(codeContactProvider.notifier).sendMessage({
+                      'name': value,
+                    });
+                    ref.read(contactFormProviderstate.notifier).setEmail(value);
                   },
-                  child: Text(
-                    'submit-message',
-                    style: GoogleFonts.firaCode(
-                      fontSize: 16,
-                      color: Colors.white,
+                ),
+                const SizedBox(height: 30),
+                const _TitleText(title: '_email:'),
+                const SizedBox(height: 5),
+                FormCustom(
+                  onChanged: (value) {
+                    ref.read(codeContactProvider.notifier).sendMessage({
+                      'email': value,
+                    });
+                    ref.read(contactFormProviderstate.notifier).setEmail(value);
+                  },
+                  errotex:
+                      errorMail.isPosted ? errorMail.email.errorMessage : null,
+                ),
+                const SizedBox(height: 30),
+                const _TitleText(title: '_message:'),
+                const SizedBox(height: 5),
+                FormCustom(
+                  isLager: true,
+                  onChanged: (value) {
+                    ref.read(codeContactProvider.notifier).sendMessage({
+                      'message': value,
+                    });
+                    ref
+                        .read(contactFormProviderstate.notifier)
+                        .setMessage(value);
+                  },
+                ),
+                const SizedBox(height: 30),
+                SizedBox(
+                  width: 195,
+                  height: 50,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xff314158),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    onPressed: () async {
+                      await ref
+                          .read(contactFormProviderstate.notifier)
+                          .submitForm();
+                    },
+                    child: Text(
+                      'submit-message',
+                      style: GoogleFonts.firaCode(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 10),
+                if (!isDesktop && !isTablet) const ContactMeFolderMenu(),
+                const SizedBox(height: 10),
+              ],
+            ),
           ),
         ),
       ),

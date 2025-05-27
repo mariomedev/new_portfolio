@@ -32,8 +32,9 @@ class _AboutMeFolderMenuState extends ConsumerState<AboutMeFolderMenu> {
   @override
   Widget build(BuildContext context) {
     final urlLaunch = ref.watch(urlProvider);
+    final bool isDesktop = ScreenManage.isDesktop(context);
     return BoxBorderVertical(
-      width: 330,
+      width: isDesktop ? 330 : double.infinity,
       child: Column(
         children: [
           const BoxBorderHorizontal(
@@ -137,6 +138,9 @@ class _AboutMeFolderMenuState extends ConsumerState<AboutMeFolderMenu> {
                   urlLaunch.launchInBrowser(AppLinks.linkdin);
                 },
               ),
+              const SizedBox(
+                height: 10,
+              )
             ],
           )
         ],

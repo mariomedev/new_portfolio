@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/core/helpers/screen_manage.dart';
 
 import '../../widgets/widgets.dart';
 import 'widgets.dart';
@@ -8,15 +9,16 @@ class ContactMeCodeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Expanded(
+    final isDesktop = ScreenManage.isDesktop(context);
+    return Expanded(
       child: Column(
         children: [
-          FileOpen(title: 'Contact'),
+          const FileOpen(title: 'Contact'),
           Expanded(
             child: Row(
               children: [
-                ContactMeForm(),
-                ContactMeInfoCode(),
+                const ContactMeForm(),
+                if (isDesktop) const ContactMeInfoCode(),
               ],
             ),
           ),

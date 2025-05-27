@@ -16,6 +16,7 @@ class HeaderNavigator extends StatefulWidget {
 class _HeaderNavigatorState extends State<HeaderNavigator> {
   @override
   Widget build(BuildContext context) {
+    final bool isDesktop = ScreenManage.isDesktop(context);
     return Container(
       height: 40,
       width: double.infinity,
@@ -26,12 +27,14 @@ class _HeaderNavigatorState extends State<HeaderNavigator> {
       ),
       child: Row(
         children: [
-          const BoxItem(
+          BoxItem(
             title: AppTexts.nameDeveloper,
-            width: 360,
+            width: isDesktop ? 360 : 110,
           ),
           BoxItemNavigator(
-            title: '_hello',
+            title: !isDesktop ? null : '_hello',
+            icon: !isDesktop ? Icons.home : null,
+            width: !isDesktop ? 40 : null,
             isSelected: widget.index == 0 ? true : false,
             onTap: () {
               context.go('/home');
@@ -39,24 +42,31 @@ class _HeaderNavigatorState extends State<HeaderNavigator> {
             },
           ),
           BoxItemNavigator(
-            title: '_about-me',
+            title: !isDesktop ? null : '_about-me',
             isSelected: widget.index == 1 ? true : false,
+            icon: !isDesktop ? Icons.person : null,
+            width: !isDesktop ? 40 : null,
             onTap: () {
               context.go('/about-me');
               setState(() {});
             },
           ),
           BoxItemNavigator(
-            title: '_projects',
+            title: !isDesktop ? null : '_projects',
             isSelected: widget.index == 2 ? true : false,
+            icon: !isDesktop ? Icons.car_crash_outlined : null,
+            width: !isDesktop ? 40 : null,
             onTap: () {
               context.go('/projects');
               setState(() {});
             },
           ),
+          //if (ScreenManage.isDesktop(context) || ScreenManage.isTablet(context))
           const Spacer(),
           BoxItemNavigator(
-            title: '_contact-me',
+            title: !isDesktop ? null : '_contact-me',
+            icon: !isDesktop ? Icons.contact_phone_rounded : null,
+            width: !isDesktop ? 40 : null,
             isSelected: widget.index == 3 ? true : false,
             onTap: () {
               context.go('/contact-me');

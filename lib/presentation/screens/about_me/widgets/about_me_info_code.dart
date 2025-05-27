@@ -11,6 +11,7 @@ class AboutMeFileCode extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final bool isDesktop = ScreenManage.isDesktop(context);
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -18,7 +19,7 @@ class AboutMeFileCode extends ConsumerWidget {
           code: ref.watch(aboutMeProvider),
           syntax: Syntax.DART,
           syntaxTheme: myCustomTheme,
-          fontSize: 18.0,
+          fontSize: isDesktop ? 18.0 : 11,
           withLinesCount: true,
           expanded: true,
           selectable: false,

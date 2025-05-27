@@ -23,16 +23,26 @@ class ProjectsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDecktop = ScreenManage.isDesktop(context);
     return Padding(
-      padding: const EdgeInsets.all(50),
+      padding: EdgeInsets.symmetric(
+        horizontal: isDecktop ? 50 : 15,
+        vertical: 30,
+      ),
       child: SizedBox(
-        height: 500,
+        height: ScreenManage.responsiveValue(
+          context,
+          mobile: 650,
+          desktop: 500,
+        ),
         width: double.infinity,
         child: Column(
           children: [
-            _Title(
-              index: index,
-              title: title,
+            FittedBox(
+              child: _Title(
+                index: index,
+                title: title,
+              ),
             ),
             const SizedBox(
               height: 20,
@@ -40,18 +50,31 @@ class ProjectsCard extends StatelessWidget {
             Expanded(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: Row(
-                  children: [
-                    _ImageCard(
-                      imagePath: imagePath,
-                    ),
-                    _BodyCard(
-                      description: description,
-                      linkGitRepo: linkGitRepo,
-                      linkDemo: linkDemo,
-                    ),
-                  ],
-                ),
+                child: isDecktop
+                    ? Row(
+                        children: [
+                          _ImageCard(
+                            imagePath: imagePath,
+                          ),
+                          _BodyCard(
+                            description: description,
+                            linkGitRepo: linkGitRepo,
+                            linkDemo: linkDemo,
+                          ),
+                        ],
+                      )
+                    : Column(
+                        children: [
+                          _ImageCard(
+                            imagePath: imagePath,
+                          ),
+                          _BodyCard(
+                            description: description,
+                            linkGitRepo: linkGitRepo,
+                            linkDemo: linkDemo,
+                          ),
+                        ],
+                      ),
               ),
             ),
           ],
@@ -99,21 +122,24 @@ class _BodyCard extends ConsumerWidget {
                   color: const Color(0xFF90A1B9),
                   fontSize: 16,
                 ),
+                maxLines: ScreenManage.isMobile(context) ? 7 : null,
               ),
               const Spacer(),
-              Row(
-                spacing: 10,
-                children: [
-                  _CustomButton(
-                    title: 'View_Repo',
-                    url: linkGitRepo,
-                  ),
-                  if (linkDemo != null)
+              FittedBox(
+                child: Row(
+                  spacing: 10,
+                  children: [
                     _CustomButton(
-                      title: 'View_Demo',
-                      url: linkDemo!,
-                    )
-                ],
+                      title: 'View_Repo',
+                      url: linkGitRepo,
+                    ),
+                    if (linkDemo != null)
+                      _CustomButton(
+                        title: 'View_Demo',
+                        url: linkDemo!,
+                      )
+                  ],
+                ),
               ),
             ],
           ),
@@ -167,8 +193,9 @@ class _ImageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDesktop = ScreenManage.isDesktop(context);
     return Expanded(
-      flex: ScreenManage.isTablet(context) ? 1 : 2,
+      flex: isDesktop ? 2 : 1,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(
