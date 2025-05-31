@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:flame/game.dart';
+import 'package:myapp/presentation/flame/overlays/title_overlay.dart';
 
 import '../../../../core/core.dart';
-import '../../../flame/flame.dart';
+import '../../../flame/cosmic_game.dart';
+import '../../../flame/overlays/game_over_overlay.dart';
 
 class HomeGameContainer extends StatefulWidget {
   const HomeGameContainer({super.key});
@@ -38,7 +40,15 @@ class _HomeGameContainerState extends State<HomeGameContainer> {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
-        child: GameWidget(game: game),
+        child: GameWidget(
+          game: game,
+          overlayBuilderMap: {
+            'GameOver': (context, CosmicGame game) =>
+                GameOverOverlay(game: game),
+            'Title': (context, CosmicGame game) => TitleOverlay(game: game),
+          },
+          initialActiveOverlays: const ['Title'],
+        ),
       ),
     );
   }
