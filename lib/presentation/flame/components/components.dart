@@ -1,0 +1,10 @@
+export 'asteroid.dart';
+export 'audio_manager.dart';
+export 'bomb.dart';
+export 'explosion.dart';
+export 'laser.dart';
+export 'pickup.dart';
+export 'player.dart';
+export 'shield.dart';
+export 'shoot_button.dart';
+export 'star.dart';

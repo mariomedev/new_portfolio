@@ -1,41 +1,45 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
+import 'package:flutter/widgets.dart';
 import 'package:myapp/presentation/flame/cosmic_game.dart';
 
 import 'components.dart';
 
-class Laser extends SpriteComponent
+class Bomb extends SpriteComponent
     with HasGameReference<CosmicGame>, CollisionCallbacks {
-  Laser({required super.position, super.angle = 0.0})
+  Bomb({required super.position})
       : super(
+          size: Vector2.all(1),
           anchor: Anchor.center,
           priority: -1,
         );
 
   @override
   FutureOr<void> onLoad() async {
-    sprite = await game.loadSprite('laser.png');
+    game.audioManager.playSound('fire');
 
-    size *= 0.25;
+    sprite = await game.loadSprite('bomb.png');
 
-    add(RectangleHitbox());
+    add(CircleHitbox(isSolid: true));
+
+    add(SequenceEffect([
+      SizeEffect.to(
+        Vector2.all(800),
+        EffectController(
+          duration: 1.0,
+          curve: Curves.easeInOut,
+        ),
+      ),
+      OpacityEffect.fadeOut(
+        EffectController(duration: 0.5),
+      ),
+      RemoveEffect(),
+    ]));
 
     return super.onLoad();
-  }
-
-  @override
-  void update(double dt) {
-    super.update(dt);
-
-    position += Vector2(sin(angle), -cos(angle)) * 500 * dt;
-
-    // remove the laser from the game if it goes above the top
-    if (position.y < -size.y / 2) {
-      removeFromParent();
-    }
   }
 
   @override
@@ -43,7 +47,6 @@ class Laser extends SpriteComponent
     super.onCollision(intersectionPoints, other);
 
     if (other is Asteroid) {
-      removeFromParent();
       other.takeDamage();
     }
   }

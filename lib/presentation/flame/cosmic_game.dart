@@ -1,51 +1,62 @@
+import 'dart:async';
 import 'dart:math';
 
-import 'flame.dart';
-
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
+import 'package:flutter/material.dart';
 
-import 'package:flutter/widgets.dart';
-import 'package:flutter/services.dart';
+import 'components/components.dart';
 
-class CosmicGame extends FlameGame with KeyboardEvents {
-  late Rocket rocket;
+class CosmicGame extends FlameGame
+    with HasKeyboardHandlerComponents, HasCollisionDetection {
+  late Player player;
   late JoystickComponent joystick;
-  late SpawnComponent asteroids;
-  late final Random _random = Random();
-  late Set<LogicalKeyboardKey> logicalKeyboardKey;
+  late SpawnComponent _asteroidSpawner;
+  late SpawnComponent _pickupSpawner;
+  final Random _random = Random();
+  late ShootButton _shootButton;
+  int _score = 0;
+  late TextComponent _scoreDisplay;
+  final List<String> playerColors = ['blue', 'red', 'green', 'purple'];
+  int playerColorIndex = 0;
+  late final AudioManager audioManager;
 
   @override
-  Future<void> onLoad() async {
+  FutureOr<void> onLoad() async {
     await Flame.device.fullScreen();
     await Flame.device.setPortrait();
 
-    startGame();
-    super.onLoad();
+    // initialize the audio manager and play the music
+    audioManager = AudioManager();
+    await add(audioManager);
+    audioManager.playMusic();
+
+    _createStars();
+
+    return super.onLoad();
   }
 
   void startGame() async {
-    //await _createJoystick();
-    _addPlayer();
-    _addAsteroidSpawn();
+    await _createJoystick();
+    await _createPlayer();
+    _createShootButton();
+    _createAsteroidSpawner();
+    _createPickupSpawner();
+    _createScoreDisplay();
   }
 
-  void _addPlayer() {
-    rocket = Rocket()
+  Future<void> _createPlayer() async {
+    player = Player()
       ..anchor = Anchor.center
-      ..position = Vector2(
-        size.x / 2,
-        size.y * 0.8,
-      );
-    add(rocket);
+      ..position = Vector2(size.x / 2, size.y * 0.8);
+    add(player);
   }
 
-  //? this function is for mobile version
-  /* Future<void> _createJoystick() async {
+  Future<void> _createJoystick() async {
     joystick = JoystickComponent(
-      priority: 10,
       knob: SpriteComponent(
         sprite: await loadSprite('joystick_knob.png'),
         size: Vector2.all(25),
@@ -55,54 +66,141 @@ class CosmicGame extends FlameGame with KeyboardEvents {
         size: Vector2.all(50),
       ),
       anchor: Anchor.bottomLeft,
-      position: Vector2(
-        20,
-        size.y - 20,
-      ),
+      position: Vector2(20, size.y - 20),
+      priority: 10,
     );
-
     add(joystick);
-  } */
+  }
 
-  void _addAsteroidSpawn() {
-    asteroids = SpawnComponent.periodRange(
-      factory: (amount) {
-        return Asteroid(position: _generateSpawnPosition());
-      },
-      maxPeriod: 1.8,
-      minPeriod: 0.8,
+  void _createShootButton() {
+    _shootButton = ShootButton()
+      ..anchor = Anchor.bottomRight
+      ..position = Vector2(size.x - 20, size.y - 20)
+      ..priority = 10;
+    add(_shootButton);
+  }
+
+  void _createAsteroidSpawner() {
+    _asteroidSpawner = SpawnComponent.periodRange(
+      factory: (index) => Asteroid(position: _generateSpawnPosition()),
+      minPeriod: 0.7,
+      maxPeriod: 1.2,
       selfPositioning: true,
     );
-    add(asteroids);
+    add(_asteroidSpawner);
+  }
+
+  void _createPickupSpawner() {
+    _pickupSpawner = SpawnComponent.periodRange(
+      factory: (index) => Pickup(
+        position: _generateSpawnPosition(),
+        pickupType:
+            PickupType.values[_random.nextInt(PickupType.values.length)],
+      ),
+      minPeriod: 5.0,
+      maxPeriod: 10.0,
+      selfPositioning: true,
+    );
+    add(_pickupSpawner);
   }
 
   Vector2 _generateSpawnPosition() {
     return Vector2(
-      10 + _random.nextDouble() * (size.x - 10),
+      10 + _random.nextDouble() * (size.x - 10 * 2),
       -100,
     );
   }
 
-  @override
-  KeyEventResult onKeyEvent(
-      KeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
-    logicalKeyboardKey = keysPressed;
+  void _createScoreDisplay() {
+    _score = 0;
 
-    if (logicalKeyboardKey.contains(LogicalKeyboardKey.arrowLeft)) {
-      rocket.position.add(Vector2(-8, 0));
+    _scoreDisplay = TextComponent(
+      text: '0',
+      anchor: Anchor.topCenter,
+      position: Vector2(size.x / 2, 20),
+      priority: 10,
+      textRenderer: TextPaint(
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 48,
+          fontWeight: FontWeight.bold,
+          shadows: [
+            Shadow(
+              color: Colors.black,
+              offset: Offset(2, 2),
+              blurRadius: 2,
+            ),
+          ],
+        ),
+      ),
+    );
+
+    add(_scoreDisplay);
+  }
+
+  void incrementScore(int amount) {
+    _score += amount;
+    _scoreDisplay.text = _score.toString();
+
+    final ScaleEffect popEffect = ScaleEffect.to(
+      Vector2.all(1.2),
+      EffectController(
+        duration: 0.05,
+        alternate: true,
+        curve: Curves.easeInOut,
+      ),
+    );
+
+    _scoreDisplay.add(popEffect);
+  }
+
+  void _createStars() {
+    for (int i = 0; i < 50; i++) {
+      add(Star()..priority = -10);
     }
-    if (logicalKeyboardKey.contains(LogicalKeyboardKey.arrowRight)) {
-      rocket.position.add(Vector2(8, 0));
-    }
-    if (logicalKeyboardKey.contains(LogicalKeyboardKey.arrowUp)) {
-      rocket.position.add(Vector2(0, -8));
-    }
-    if (logicalKeyboardKey.contains(LogicalKeyboardKey.arrowDown)) {
-      rocket.position.add(Vector2(0, 8));
-    }
-    if (logicalKeyboardKey.contains(LogicalKeyboardKey.space)) {
-      rocket.startShooting();
-    }
-    return super.onKeyEvent(event, keysPressed);
+  }
+
+  void playerDied() {
+    overlays.add('GameOver');
+    pauseEngine();
+  }
+
+  void restartGame() {
+    // remove any asteroids and pickups that are currently in the game
+    children.whereType<PositionComponent>().forEach((component) {
+      if (component is Asteroid || component is Pickup) {
+        remove(component);
+      }
+    });
+
+    // reset the asteroid and pickup spawners
+    _asteroidSpawner.timer.start();
+    _pickupSpawner.timer.start();
+
+    // reset the score to 0
+    _score = 0;
+    _scoreDisplay.text = '0';
+
+    // create a new player sprite
+    _createPlayer();
+
+    resumeEngine();
+  }
+
+  void quitGame() {
+    // remove everything from the game except the stars
+    children.whereType<PositionComponent>().forEach((component) {
+      if (component is! Star) {
+        remove(component);
+      }
+    });
+
+    remove(_asteroidSpawner);
+    remove(_pickupSpawner);
+
+    // show the title overlay
+    overlays.add('Title');
+
+    resumeEngine();
   }
 }
